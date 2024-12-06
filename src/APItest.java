@@ -40,7 +40,7 @@ public class APItest {
 //                    double rate = (double) dayRate.get("rate");
                     double rate = getRate(date);
                     System.out.println("Rate for:" + date + " is: " + rate);
-                    
+
                 }
             } catch (DateTimeParseException e) {
                 System.out.println("Invalid date format try again.");
