@@ -20,6 +20,7 @@ import java.util.Scanner;
 public class APItest {
     public static void main(String[] args) {
         boolean dateValid = false;
+        boolean continueConversion = true;
         System.out.println("**************************************");
         System.out.println("Please enter date in yyyy-mm-dd format");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -40,12 +41,30 @@ public class APItest {
 //                    double rate = (double) dayRate.get("rate");
                     double rate = getRate(date);
                     System.out.println("Rate for:" + date + " is: " + rate);
-
-                }
+                    System.out.println("Convert a specific amount to RUB? (Please enter whole number between 0 and 1000000, 'N' to end)");
+//                    scan.nextLine();
+                    while (continueConversion) {
+                        String convertInput = scan.nextLine();
+                        if(convertInput.equalsIgnoreCase("N")){
+                            System.out.println("exiting program, bye!");
+                            continueConversion = false;
+                        } else {
+                            try {
+                                int convertInt = Integer.parseInt(convertInput);
+                                double convertedAmount = convertInt * rate;
+                                System.out.println("The amount of " + convertInput + "USD equals: " + convertedAmount + " RUB");
+                                break;
+                            } catch (NumberFormatException e){
+                                System.out.println("invalid input, please try again");
+                            }
+                        }
+                    } // continue while loop end
+                    scan.close();
+                } // wrapped for end of if statement for conversion rate get
             } catch (DateTimeParseException e) {
                 System.out.println("Invalid date format try again.");
             }
-        }
+        } // end of full scanner/conversion loop
     }
     private static double getRate(String date){
         String urlString = "https://kekkai-api.redume.su/api/getRate/?from_currency=USD&conv_currency=RUB&date="
