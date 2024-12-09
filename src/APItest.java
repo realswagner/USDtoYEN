@@ -1,8 +1,3 @@
-//import java.net.URL;
-//import java.net.URI;
-//import java.net.http.HttpClient;
-//import java.net.http.HttpRequest;
-//import java.net.http.HttpResponse;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -36,14 +31,10 @@ public class APItest {
                     System.out.println("Date entered is valid " + parsedDate);
                     dateValid = true;
 
-//                    JSONObject dayRate = getRate(date);
-////                    assert dayRate != null;
-//                    double rate = (double) dayRate.get("rate");
                     double rate = getRate(date);
                     System.out.println("Rate for:" + date + " is: " + rate);
                     System.out.println("Convert a specific amount to RUB? (Please enter whole number between 0 and 1000000, 'N' to end)");
-//                    scan.nextLine();
-                    while (continueConversion) {
+                    while (continueConversion) { //bool for next loop to convert amount entered by user
                         String convertInput = scan.nextLine();
                         if(convertInput.equalsIgnoreCase("N")){
                             System.out.println("exiting program, bye!");
